@@ -447,8 +447,8 @@ footer .brand img { width: 22px; height: 22px; }
         <div class="glow"></div>
         <div class="taskbar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
         <img src="img/rest.png" width="292" height="32" alt="The closed island showing the line of the song being sung" data-label="At rest: the line being sung" class="on">
-        <img src="img/home.png" width="496" height="320" alt="Home: clock, calendar and the song playing" data-label="Hover: Home, with the calendar and your song">
-        <img src="img/music.png" width="616" height="292" alt="Music: album cover, controls and synced lyrics" data-label="Music, with lyrics that follow along">
+        <img src="img/home.png" width="497" height="321" alt="Home: clock, calendar and the song playing" data-label="Hover: Home, with the calendar and your song">
+        <img src="img/music.png" width="617" height="293" alt="Music: album cover, controls and synced lyrics" data-label="Music, with lyrics that follow along">
         <img src="img/notes-peek.png" width="293" height="32" alt="A Discord message peeking on the closed island" data-label="A message arrives">
         <img src="img/focus.png" width="496" height="236" alt="Focus timer set to 25 minutes" data-label="Focus timer">
       </div>
@@ -458,8 +458,8 @@ footer .brand img { width: 22px; height: 22px; }
 
   <div class="ticker" aria-label="What Cosmo does">
     <ul>
-      <li>Synced lyrics</li><li>Romanized lyrics</li><li>Media controls</li><li>Focus timer</li><li>Tasks</li><li>Sticky notes</li><li>Calendar</li><li>CPU &amp; GPU</li><li>Power in watts</li><li>FPS overlay</li><li>File shelf</li><li>Phone drop</li><li>Clipboard history</li><li>App launcher</li><li>Notifications</li><li>Click to open</li><li>Five themes</li><li>Six fonts</li>
-      <li aria-hidden="true">Synced lyrics</li><li aria-hidden="true">Romanized lyrics</li><li aria-hidden="true">Media controls</li><li aria-hidden="true">Focus timer</li><li aria-hidden="true">Tasks</li><li aria-hidden="true">Sticky notes</li><li aria-hidden="true">Calendar</li><li aria-hidden="true">CPU &amp; GPU</li><li aria-hidden="true">Power in watts</li><li aria-hidden="true">FPS overlay</li><li aria-hidden="true">File shelf</li><li aria-hidden="true">Phone drop</li><li aria-hidden="true">Clipboard history</li><li aria-hidden="true">App launcher</li><li aria-hidden="true">Notifications</li><li aria-hidden="true">Click to open</li><li aria-hidden="true">Five themes</li><li aria-hidden="true">Six fonts</li>
+      <li>Synced lyrics</li><li>Romanized lyrics</li><li>Lyric timing</li><li>Media controls</li><li>10-second skips</li><li>Focus timer</li><li>Tasks</li><li>Due dates</li><li>Sticky notes</li><li>Calendar</li><li>CPU &amp; GPU</li><li>Power in watts</li><li>FPS overlay</li><li>File shelf</li><li>Phone drop</li><li>Clipboard history</li><li>App launcher</li><li>Notifications</li><li>Click to open</li><li>Three sizes</li><li>Five themes</li><li>Six fonts</li>
+      <li aria-hidden="true">Synced lyrics</li><li aria-hidden="true">Romanized lyrics</li><li aria-hidden="true">Lyric timing</li><li aria-hidden="true">Media controls</li><li aria-hidden="true">10-second skips</li><li aria-hidden="true">Focus timer</li><li aria-hidden="true">Tasks</li><li aria-hidden="true">Due dates</li><li aria-hidden="true">Sticky notes</li><li aria-hidden="true">Calendar</li><li aria-hidden="true">CPU &amp; GPU</li><li aria-hidden="true">Power in watts</li><li aria-hidden="true">FPS overlay</li><li aria-hidden="true">File shelf</li><li aria-hidden="true">Phone drop</li><li aria-hidden="true">Clipboard history</li><li aria-hidden="true">App launcher</li><li aria-hidden="true">Notifications</li><li aria-hidden="true">Click to open</li><li aria-hidden="true">Three sizes</li><li aria-hidden="true">Five themes</li><li aria-hidden="true">Six fonts</li>
     </ul>
   </div>
 
@@ -477,12 +477,13 @@ footer .brand img { width: 22px; height: 22px; }
           <h3>Your song, and every word of it.</h3>
           <p>Works with Spotify, YouTube in the browser, Apple Music, or any app in Windows' media controls. Synced lyrics scroll beside the cover, and the line being sung stays on the closed island.</p>
           <ul class="ticks">
-            <li>Play, pause and skip from the island</li>
+            <li>Play, pause, skip, and jump 10 seconds back or on, from the island</li>
             <li>Accent colour picked from the album cover</li>
             <li>Lyrics from LRCLIB, or NetEase when LRCLIB has none, saved so each song is looked up once</li>
+            <li>Lyrics running early or late? Nudge them, and the fix is kept for that song</li>
           </ul>
         </div>
-        <div class="stage warm reveal" style="--d:120"><img class="drop" src="img/music.png" width="616" height="292" alt="Music page with synced lyrics" loading="lazy"></div>
+        <div class="stage warm reveal" style="--d:120"><img class="drop" src="img/music.png" width="617" height="293" alt="Music page with synced lyrics" loading="lazy"></div>
       </div>
 
       <div class="row flip">
@@ -564,7 +565,20 @@ footer .brand img { width: 22px; height: 22px; }
           <h3>Put it where it suits you.</h3>
           <p>Drag the island to any edge. At the top it hangs as a notch; on the left or right it stands up, with pages laid out to match; at the bottom it opens upward; anywhere else it floats. It snaps to the middle of each edge, and a lock keeps it there.</p>
         </div>
-        <div class="stage warm reveal" style="--d:120"><img class="drop" src="img/left-music.png" width="340" height="452" alt="The island standing on the left edge, showing music and lyrics" loading="lazy"></div>
+        <div class="stage warm reveal" style="--d:120"><img class="drop" src="img/left-music.png" width="341" height="453" alt="The island standing on the left edge, showing music and lyrics" loading="lazy"></div>
+      </div>
+
+      <div class="row flip">
+        <div class="copy reveal">
+          <span class="tag">Tasks</span>
+          <h3>What's due, and when.</h3>
+          <p>A short to-do list one hover away. Give a task a due date with a click: today, tomorrow, next week or any day on the calendar. Overdue ones turn red, and Home tells you what's due today.</p>
+          <ul class="ticks">
+            <li>Sticky notes sit on the desktop with a title and their own due date, and are listed here too</li>
+            <li>Click a note in the list to bring it to the front</li>
+          </ul>
+        </div>
+        <div class="stage cool reveal" style="--d:120"><img class="drop" src="img/tasks.png" width="341" height="367" alt="Tasks with due dates (Today, Tomorrow, one overdue in red) and a sticky note in the list" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -574,12 +588,12 @@ footer .brand img { width: 22px; height: 22px; }
       <div class="section-head reveal">
         <span class="kicker">Themes</span>
         <h2>Five looks to start from.</h2>
-        <p>Cosmo, Smoke, Midnight, Light and Retro are only starting points: change the background, text and accent with a colour picker, pick from six fonts, add scanlines.</p>
+        <p>Cosmo, Smoke, Midnight, Light and Retro are only starting points: change the background, text and accent with a colour picker, pick from six fonts, add scanlines, and make the island Small, Medium or Large.</p>
       </div>
       <div class="themes">
         <figure class="reveal" style="--d:0"><div class="stage cool"><img src="img/theme-midnight-system.png" width="496" height="494" alt="Midnight theme" loading="lazy"></div><figcaption>Midnight</figcaption></figure>
-        <figure class="reveal" style="--d:120"><div class="stage warm"><img src="img/theme-light-music.png" width="616" height="292" alt="Light theme" loading="lazy"></div><figcaption>Light</figcaption></figure>
-        <figure class="reveal" style="--d:240"><div class="stage game"><img src="img/theme-retro-home.png" width="496" height="320" alt="Retro theme with a pixel font" loading="lazy"></div><figcaption>Retro</figcaption></figure>
+        <figure class="reveal" style="--d:120"><div class="stage warm"><img src="img/theme-light-music.png" width="617" height="293" alt="Light theme" loading="lazy"></div><figcaption>Light</figcaption></figure>
+        <figure class="reveal" style="--d:240"><div class="stage game"><img src="img/theme-retro-home.png" width="497" height="321" alt="Retro theme with a pixel font" loading="lazy"></div><figcaption>Retro</figcaption></figure>
       </div>
       <div class="swatches reveal" aria-hidden="true">
         <span style="background:#ff9f0a"></span><span style="background:#0a84ff"></span><span style="background:#30d158"></span><span style="background:#ff375f"></span><span style="background:#bf5af2"></span><span style="background:#40c8e0"></span><span style="background:conic-gradient(#ff5e5e,#ffd35e,#5eff8b,#5ecbff,#b35eff,#ff5e5e)"></span>
@@ -601,8 +615,8 @@ footer .brand img { width: 22px; height: 22px; }
         </div>
         <div class="card reveal" style="--d:80">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 1.5 1.5L8 5M4 12l1.5 1.5L8 11M4 18l1.5 1.5L8 17M12 6h8M12 12h8M12 18h8"/></svg></div>
-          <h4>Tasks</h4>
-          <p>A short to-do list that's always one hover away.</p>
+          <h4>Due dates</h4>
+          <p>For tasks and sticky notes alike: Today, Tomorrow or the day, and red once it's passed.</p>
         </div>
         <div class="card reveal" style="--d:160">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
@@ -627,7 +641,7 @@ footer .brand img { width: 22px; height: 22px; }
         <div class="card reveal" style="--d:0">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v10l-6 6H5Z"/><path d="M13 20v-6h6M8.5 9h7M8.5 13h3"/></svg></div>
           <h4>Sticky notes</h4>
-          <p>Notes on your desktop, as long as you like, in the island's colours. Pin one on top; they come back after a restart.</p>
+          <p>Notes on your desktop with a title, as long as you like, in the island's colours. Pin one on top; they come back after a restart.</p>
         </div>
         <div class="card reveal" style="--d:80">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 9 11 4-4.5 1.5L14 19Z"/><path d="M5 3v2M3 5h2M9.5 3.5 8 5M3.5 9.5 5 8"/></svg></div>
@@ -737,7 +751,7 @@ footer .brand img { width: 22px; height: 22px; }
         </details>
         <details>
           <summary>Where are my settings kept?</summary>
-          <p>In <code>%APPDATA%\Cosmo</code>: settings, tasks, sticky notes, the focus timer, pinned apps, the shelf, clipboard history (encrypted), saved lyrics and the Kanji readings add-on, so all of it is still there after a restart. Uninstalling asks whether to remove them too.</p>
+          <p>In <code>%APPDATA%\Cosmo</code>: settings, tasks, sticky notes, the focus timer, pinned apps, the shelf, clipboard history (encrypted), saved lyrics and their timing fixes, and the Kanji readings add-on, so all of it is still there after a restart. Uninstalling asks whether to remove them too.</p>
         </details>
         <details>
           <summary>Japanese lyrics still show kanji.</summary>

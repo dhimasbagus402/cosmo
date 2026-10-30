@@ -607,14 +607,14 @@ footer .brand img { width: 22px; height: 22px; }
         <p>Cosmo, Smoke, Midnight, Light and Retro are only starting points: change the background, text and accent with a colour picker, pick from six fonts, add scanlines, and make the island Small, Medium or Large.</p>
       </div>
       <div class="themes">
-        <figure class="reveal" style="--d:0"><div class="stage cool"><img src="img/theme-midnight-system.png" width="496" height="494" alt="Midnight theme" loading="lazy"></div><figcaption>Midnight</figcaption></figure>
-        <figure class="reveal" style="--d:120"><div class="stage warm"><img src="img/theme-light-music.png" width="617" height="293" alt="Light theme" loading="lazy"></div><figcaption>Light</figcaption></figure>
-        <figure class="reveal" style="--d:240"><div class="stage game"><img src="img/theme-retro-home.png" width="497" height="321" alt="Retro theme with a pixel font" loading="lazy"></div><figcaption>Retro</figcaption></figure>
+        <figure class="reveal" style="--d:0"><div class="stage cool"><img src="img/theme-midnight-system.png?v=2" data-accent-mask="img/theme-midnight-system-accent.png?v=2" width="496" height="494" alt="Midnight theme" loading="lazy"></div><figcaption>Midnight</figcaption></figure>
+        <figure class="reveal" style="--d:120"><div class="stage warm"><img src="img/theme-light-music.png?v=2" data-accent-mask="img/theme-light-music-accent.png?v=2" width="617" height="293" alt="Light theme" loading="lazy"></div><figcaption>Light</figcaption></figure>
+        <figure class="reveal" style="--d:240"><div class="stage game"><img src="img/theme-retro-home.png?v=2" data-accent-mask="img/theme-retro-home-accent.png?v=2" width="497" height="321" alt="Retro theme with a pixel font" loading="lazy"></div><figcaption>Retro</figcaption></figure>
       </div>
       <div class="swatches reveal" id="swatches" role="radiogroup" aria-label="Accent colour for this page">
         <button type="button" role="radio" aria-checked="true" aria-label="Orange" data-accent="#ff9f0a" style="--c:#ff9f0a"></button><button type="button" role="radio" aria-checked="false" aria-label="Blue" data-accent="#0a84ff" style="--c:#0a84ff"></button><button type="button" role="radio" aria-checked="false" aria-label="Green" data-accent="#30d158" style="--c:#30d158"></button><button type="button" role="radio" aria-checked="false" aria-label="Pink" data-accent="#ff375f" style="--c:#ff375f"></button><button type="button" role="radio" aria-checked="false" aria-label="Purple" data-accent="#bf5af2" style="--c:#bf5af2"></button><button type="button" role="radio" aria-checked="false" aria-label="Teal" data-accent="#40c8e0" style="--c:#40c8e0"></button><label role="radio" aria-checked="false" title="Any colour" style="--ring-c:var(--text); --c:conic-gradient(#ff5e5e,#ffd35e,#5eff8b,#5ecbff,#b35eff,#ff5e5e)"><input type="color" value="#ff9f0a" aria-label="Any colour"></label>
       </div>
-      <p class="swatch-note reveal">Pick an accent to try it on this page.</p>
+      <p class="swatch-note reveal">Pick an accent to try it on the island and this page.</p>
     </div>
   </section>
 
@@ -919,6 +919,49 @@ footer .brand img { width: 22px; height: 22px; }
       root.style.setProperty('--accent-ink', y < 0.2 ? '#ffffff' : '#1a0f00');
     }
     Array.prototype.forEach.call(swatches.children, function (s) { s.setAttribute('aria-checked', String(s === chosen)); });
+    recolour(c);
+  }
+
+  // Theme previews: each comes with a mask of where Cosmo drew its accent
+  // (from shots in black and in white), so a picked colour is painted in as
+  // Cosmo would draw it: pixel + (colour - orange) × mask.
+  var previews = Array.prototype.map.call(document.querySelectorAll('img[data-accent-mask]'), function (img) {
+    return { img: img, src: img.src, url: null, pixels: null };
+  });
+  function picture(src) {
+    return new Promise(function (done, fail) { var i = new Image(); i.onload = function () { done(i); }; i.onerror = fail; i.src = src; });
+  }
+  function pixelsOf(i) {
+    var cv = document.createElement('canvas'); cv.width = i.naturalWidth; cv.height = i.naturalHeight;
+    var g = cv.getContext('2d'); g.drawImage(i, 0, 0);
+    return g.getImageData(0, 0, cv.width, cv.height);
+  }
+  function recolour(c) {
+    var n = parseInt(c.slice(1), 16), d = [(n >> 16) - 0xff, ((n >> 8) & 255) - 0x9f, (n & 255) - 0x0a];
+    previews.forEach(function (p) {
+      p.want = c;
+      if (c.toLowerCase() === '#ff9f0a') { p.img.src = p.src; return; }
+      p.pixels = p.pixels || Promise.all([picture(p.src), picture(p.img.dataset.accentMask)]).then(function (r) {
+        return { base: pixelsOf(r[0]), mask: pixelsOf(r[1]).data };
+      });
+      p.pixels.then(function (px) {
+        // A preview and mask from different versions don't line up.
+        if (p.want !== c || px.mask.length !== px.base.data.length) return;
+        var out = new ImageData(new Uint8ClampedArray(px.base.data), px.base.width, px.base.height), o = out.data, m = px.mask;
+        for (var i = 0; i < o.length; i += 4) {
+          var a = m[i] / 255;
+          if (a) { o[i] += d[0] * a; o[i + 1] += d[1] * a; o[i + 2] += d[2] * a; }
+        }
+        var cv = document.createElement('canvas'); cv.width = out.width; cv.height = out.height;
+        cv.getContext('2d').putImageData(out, 0, 0);
+        cv.toBlob(function (blob) {
+          if (p.want !== c || !blob) return;
+          if (p.url) URL.revokeObjectURL(p.url);
+          p.url = URL.createObjectURL(blob);
+          p.img.src = p.url;
+        });
+      }).catch(function () { /* the plain preview stays */ });
+    });
   }
   swatches.addEventListener('click', function (e) {
     var b = e.target.closest('button');

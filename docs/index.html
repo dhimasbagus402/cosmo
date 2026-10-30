@@ -134,7 +134,8 @@ body {
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
-.wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+/* The side margin grows with the window: 28px on a phone, 96px on a laptop. */
+.wrap { --gutter: clamp(28px, 8vw, 96px); width: min(1120px, 100% - 2 * var(--gutter)); margin-inline: auto; }
 
 /* The sky behind everything: slow stars and two drifting glows. */
 #stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; opacity: var(--stars); transition: opacity .5s ease; }

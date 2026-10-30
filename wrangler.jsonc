@@ -1,0 +1,8 @@
+// Cloudflare Workers: serve the landing page in docs/ as static files.
+{
+  "name": "cosmo",
+  "compatibility_date": "2025-10-01",
+  "assets": {
+    "directory": "./docs"
+  }
+}

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shared with Cosmo</title>
+<meta name="description" content="A screenshot or recording shared with Cosmo. Links last 12 hours.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#050506">
+<meta property="og:title" content="Shared with Cosmo">
+<meta property="og:description" content="A screenshot or recording shared with Cosmo. Links last 12 hours.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cosmo.dhimasbagus.my.id/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #050506;
+  --surface: rgba(255, 255, 255, 0.04);
+  --line: rgba(255, 255, 255, 0.09);
+  --text: #f5f5f7;
+  --muted: #a1a1a8;
+  --faint: #6e6e76;
+  --accent: #ff9f0a;
+  --accent-hi: #ffb340;
+  --accent-ink: #1a0f00;
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --bg: #f4f4f6;
+    --surface: #ffffff;
+    --line: rgba(0, 0, 0, 0.08);
+    --text: #1c1c1e;
+    --muted: #5c5c63;
+    --faint: #8e8e95;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 var(--font); }
+body { min-height: 100vh; display: flex; flex-direction: column; }
+header { display: flex; align-items: center; gap: 10px; padding: 18px 24px; }
+header a { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 600; }
+header img { width: 28px; height: 28px; border-radius: 7px; }
+main { flex: 1; display: flex; justify-content: center; align-items: flex-start; padding: 8px 16px 40px; }
+.card { width: 100%; max-width: 1040px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 16px; }
+.media { display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.35); border-radius: 16px; overflow: hidden; min-height: 200px; }
+.media img, .media video { display: block; max-width: 100%; max-height: 72vh; }
+.info { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 18px 8px 4px; }
+.title { flex: 1 1 260px; min-width: 0; }
+.title h1 { margin: 0; font-size: 20px; font-weight: 600; overflow-wrap: anywhere; }
+.meta { margin-top: 4px; color: var(--muted); font-size: 13.5px; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.meta .left { color: var(--accent); font-weight: 600; }
+.download { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none; }
+.download:hover { background: var(--accent-hi); }
+.note { text-align: center; padding: 64px 24px; }
+.note h1 { margin: 12px 0 6px; font-size: 22px; }
+.note p { margin: 0 auto; color: var(--muted); max-width: 420px; }
+.note .dot { width: 54px; height: 54px; border-radius: 50%; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; font-size: 24px; }
+.note a { color: var(--accent); }
+.spin { width: 34px; height: 34px; margin: 0 auto; border-radius: 50%; border: 3px solid var(--line); border-top-color: var(--accent); animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+footer { text-align: center; color: var(--faint); font-size: 12.5px; padding: 0 16px 24px; }
+footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <a href="https://cosmo.dhimasbagus.my.id/"><img src="../img/icon.png" alt="">Cosmo</a>
+</header>
+<main>
+  <div class="card" id="card">
+    <div class="note"><div class="spin"></div></div>
+  </div>
+</main>
+<footer>Shared with <a href="https://cosmo.dhimasbagus.my.id/">Cosmo</a> · links last 12 hours, then the file is deleted</footer>
+<script>
+// The link's id is what follows "?": /s/?k3x9pq7m
+const API = "https://gyftoaaydbqfklsdmyku.supabase.co/functions/v1/cosmo/share";
+const card = document.getElementById("card");
+const id = location.search.replace(/^\?/, "").split("&")[0];
+
+function note(icon, title, text) {
+  card.innerHTML = "";
+  const box = document.createElement("div");
+  box.className = "note";
+  box.innerHTML = '<div class="dot"></div><h1></h1><p></p>';
+  box.querySelector(".dot").textContent = icon;
+  box.querySelector("h1").textContent = title;
+  box.querySelector("p").textContent = text;
+  card.appendChild(box);
+  document.title = title + " · Cosmo";
+}
+
+function size(bytes) {
+  const units = ["B", "KB", "MB", "GB"];
+  let n = bytes, u = 0;
+  while (n >= 1024 && u < units.length - 1) { n /= 1024; u++; }
+  return (u ? n.toFixed(1) : n) + " " + units[u];
+}
+
+// "11h 42m left", ticking down; the page says so when it runs out.
+function left(until, el) {
+  const tick = () => {
+    const s = Math.floor((until - Date.now()) / 1000);
+    if (s <= 0) {
+      note("⏱", "This link has run out", "Links shared from Cosmo last 12 hours, then the file is deleted.");
+      return;
+    }
+    const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
+    el.textContent = h ? `${h}h ${m}m left` : m ? `${m}m left` : `${s}s left`;
+    setTimeout(tick, s < 120 ? 1000 : 30000);
+  };
+  tick();
+}
+
+async function show() {
+  if (!/^[a-z0-9]{6,16}$/.test(id)) {
+    note("?", "Nothing here", "This link isn't complete. Check that it was copied whole.");
+    return;
+  }
+  let r;
+  try {
+    r = await fetch(API + "?id=" + encodeURIComponent(id));
+  } catch (e) {
+    note("!", "Couldn't load it", "Check your connection and try again.");
+    return;
+  }
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) {
+    note("⏱", "This link has run out", "Links shared from Cosmo last 12 hours, then the file is deleted.");
+    return;
+  }
+  const kind = data.kind;
+  const title = data.title || (kind === "video" ? "Recording" : kind === "gif" ? "GIF" : "Screenshot");
+  document.title = title + " · Cosmo";
+  card.innerHTML = "";
+
+  const media = document.createElement("div");
+  media.className = "media";
+  if (kind === "video") {
+    const v = document.createElement("video");
+    v.src = data.url;
+    v.controls = true;
+    v.playsInline = true;
+    v.preload = "metadata";
+    media.appendChild(v);
+  } else {
+    const img = document.createElement("img");
+    img.src = data.url;
+    img.alt = title;
+    media.appendChild(img);
+  }
+  card.appendChild(media);
+
+  const info = document.createElement("div");
+  info.className = "info";
+  info.innerHTML = '<div class="title"><h1></h1><div class="meta"><span class="left"></span><span class="views"></span><span class="size"></span></div></div><a class="download">Download</a>';
+  info.querySelector("h1").textContent = title;
+  info.querySelector(".views").textContent = data.views === 1 ? "1 view" : `${data.views} views`;
+  info.querySelector(".size").textContent = size(data.size);
+  info.querySelector(".download").href = data.download;
+  card.appendChild(info);
+  left(Date.parse(data.expires_at), info.querySelector(".left"));
+}
+
+show();
+</script>
+</body>
+</html>

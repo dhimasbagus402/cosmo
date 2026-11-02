@@ -1,0 +1,14 @@
+# Free Supabase projects go to sleep after a week without use, and shared
+# links would stop working until woken by hand. A daily touch keeps it awake.
+name: Keep sharing awake
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl --fail --silent --show-error --max-time 30 https://gyftoaaydbqfklsdmyku.supabase.co/functions/v1/cosmo/ping

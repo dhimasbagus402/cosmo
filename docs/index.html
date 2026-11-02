@@ -322,6 +322,7 @@ kbd { font: 600 12px/1 var(--font); padding: 2px 6px; vertical-align: 1px; borde
 /* The island drops in from the top edge when its stage scrolls into view. */
 .js .stage .drop { transform: translateY(-42%) scale(.92); opacity: 0; transition: transform 1s var(--spring), opacity .6s ease; transition-delay: calc(var(--d, 150) * 1ms); }
 .js .reveal.in .stage .drop, .js .stage.reveal.in .drop { transform: none; opacity: 1; }
+.stage .shot { margin-top: 28px; border-radius: 14px; box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6); }
 .fps-live { font-variant-numeric: tabular-nums; }
 
 /* Themes strip */
@@ -443,7 +444,7 @@ footer .brand img { width: 22px; height: 22px; }
 
 <main id="top">
   <div class="hero wrap">
-    <span class="eyebrow rise" style="--d:0"><b>NEW</b>Free for Windows 10 &amp; 11</span>
+    <span class="eyebrow rise" style="--d:0"><b>NEW</b>Screenshots, recordings and share links</span>
     <h1 class="rise" style="--d:90">A living <span class="grad">island</span> at the top of your screen.</h1>
     <p class="lede rise" style="--d:180">Cosmo rests as a small clock, shows the line being sung while your music plays, and opens into a tiny dashboard when your mouse comes by.</p>
     <div class="cta rise" style="--d:270">
@@ -456,7 +457,7 @@ footer .brand img { width: 22px; height: 22px; }
         <span>View on GitHub</span>
       </a>
     </div>
-    <p class="meta rise" style="--d:340">About 2.6 MB · installs without admin rights</p>
+    <p class="meta rise" style="--d:340">Free for Windows 10 &amp; 11 · about 2.9 MB · installs without admin rights</p>
 
     <div class="desk-wrap rise" style="--d:420">
       <div class="desk" id="desk" aria-label="Cosmo on a desktop, opening into its pages">
@@ -474,8 +475,8 @@ footer .brand img { width: 22px; height: 22px; }
 
   <div class="ticker" aria-label="What Cosmo does">
     <ul>
-      <li>Synced lyrics</li><li>Romanized lyrics</li><li>Lyric timing</li><li>Media controls</li><li>10-second skips</li><li>Focus timer</li><li>Tasks</li><li>Due dates</li><li>Sticky notes</li><li>Calendar</li><li>CPU &amp; GPU</li><li>Power in watts</li><li>FPS overlay</li><li>File shelf</li><li>Phone drop</li><li>Clipboard history</li><li>App launcher</li><li>Notifications</li><li>Click to open</li><li>Three sizes</li><li>Five themes</li><li>Six fonts</li>
-      <li aria-hidden="true">Synced lyrics</li><li aria-hidden="true">Romanized lyrics</li><li aria-hidden="true">Lyric timing</li><li aria-hidden="true">Media controls</li><li aria-hidden="true">10-second skips</li><li aria-hidden="true">Focus timer</li><li aria-hidden="true">Tasks</li><li aria-hidden="true">Due dates</li><li aria-hidden="true">Sticky notes</li><li aria-hidden="true">Calendar</li><li aria-hidden="true">CPU &amp; GPU</li><li aria-hidden="true">Power in watts</li><li aria-hidden="true">FPS overlay</li><li aria-hidden="true">File shelf</li><li aria-hidden="true">Phone drop</li><li aria-hidden="true">Clipboard history</li><li aria-hidden="true">App launcher</li><li aria-hidden="true">Notifications</li><li aria-hidden="true">Click to open</li><li aria-hidden="true">Three sizes</li><li aria-hidden="true">Five themes</li><li aria-hidden="true">Six fonts</li>
+      <li>Synced lyrics</li><li>Romanized lyrics</li><li>Lyric timing</li><li>Media controls</li><li>10-second skips</li><li>Focus timer</li><li>Tasks</li><li>Due dates</li><li>Sticky notes</li><li>Calendar</li><li>CPU &amp; GPU</li><li>Power in watts</li><li>FPS overlay</li><li>Screenshots</li><li>Text from the screen</li><li>Screen recording</li><li>Image &amp; video editor</li><li>GIFs</li><li>Share links</li><li>File shelf</li><li>Phone drop</li><li>Clipboard history</li><li>App launcher</li><li>Notifications</li><li>Click to open</li><li>Three sizes</li><li>Five themes</li><li>Six fonts</li>
+      <li aria-hidden="true">Synced lyrics</li><li aria-hidden="true">Romanized lyrics</li><li aria-hidden="true">Lyric timing</li><li aria-hidden="true">Media controls</li><li aria-hidden="true">10-second skips</li><li aria-hidden="true">Focus timer</li><li aria-hidden="true">Tasks</li><li aria-hidden="true">Due dates</li><li aria-hidden="true">Sticky notes</li><li aria-hidden="true">Calendar</li><li aria-hidden="true">CPU &amp; GPU</li><li aria-hidden="true">Power in watts</li><li aria-hidden="true">FPS overlay</li><li aria-hidden="true">Screenshots</li><li aria-hidden="true">Text from the screen</li><li aria-hidden="true">Screen recording</li><li aria-hidden="true">Image &amp; video editor</li><li aria-hidden="true">GIFs</li><li aria-hidden="true">Share links</li><li aria-hidden="true">File shelf</li><li aria-hidden="true">Phone drop</li><li aria-hidden="true">Clipboard history</li><li aria-hidden="true">App launcher</li><li aria-hidden="true">Notifications</li><li aria-hidden="true">Click to open</li><li aria-hidden="true">Three sizes</li><li aria-hidden="true">Five themes</li><li aria-hidden="true">Six fonts</li>
     </ul>
   </div>
 
@@ -518,6 +519,35 @@ footer .brand img { width: 22px; height: 22px; }
 
       <div class="row">
         <div class="copy reveal">
+          <span class="tag">Captures</span>
+          <h3>Grab it, mark it up, or record it.</h3>
+          <p>Pick a part of the screen, a window, or the whole screen. A screenshot is copied and saved at once and opens in the editor, ready for arrows, boxes, highlights, numbered steps, text, blur and cropping.</p>
+          <ul class="ticks">
+            <li><span class="keys"><kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd></span> screenshot, <span class="keys"><kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>T</kbd></span> copies the text in it, <span class="keys"><kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd></span> records; change any of them</li>
+            <li>Recordings to MP4 with the PC's sound and your microphone, mouse clicks and shortcuts shown, and pause when you need it</li>
+            <li>Trim a recording, add text for a moment of it, or turn it into a GIF</li>
+            <li>Kept in Pictures › Screenshots › Cosmo: the newest 20 screenshots and 10 recordings</li>
+          </ul>
+        </div>
+        <div class="stage cool reveal" style="--d:120"><img class="shot" src="img/captures-editor.png" width="550" height="332" alt="The image editor with a box, arrows, numbered steps and text on a screenshot" loading="lazy"></div>
+      </div>
+
+      <div class="row flip">
+        <div class="copy reveal">
+          <span class="tag">Share</span>
+          <h3>A link instead of an attachment.</h3>
+          <p>Choose Share on any screenshot, recording or GIF and its link is copied for you. The link opens a page with the capture, how long it has left, how many have seen it, and a Download button.</p>
+          <ul class="ticks">
+            <li>Links last 12 hours, then the file is deleted</li>
+            <li>The Links tab shows yours, to copy, open or take down early</li>
+            <li>Up to 50 MB a file; nothing leaves your PC until you choose Share</li>
+          </ul>
+        </div>
+        <div class="stage warm reveal" style="--d:120"><img class="drop" src="img/captures-share.png" width="496" height="394" alt="Captures page: one screenshot just shared with its link copied, another uploading" loading="lazy"></div>
+      </div>
+
+      <div class="row">
+        <div class="copy reveal">
           <span class="tag">System</span>
           <h3>What your PC is doing, down to the watt.</h3>
           <p>CPU load per thread, GPU and VRAM, memory, network, every drive with its reads and writes, and the power the whole PC is drawing. Read from the same counters Task Manager uses.</p>
@@ -553,7 +583,7 @@ footer .brand img { width: 22px; height: 22px; }
           <p>Drop files on the island and drag them out later, into a chat, an email or another folder. Only their places are remembered; nothing is copied.</p>
           <ul class="ticks">
             <li>Send photos from your phone by scanning a QR code: same Wi-Fi, nothing to install</li>
-            <li>The phone link works only while its card is open</li>
+            <li>The phone link works only while its card is open, and warns you on a public network</li>
           </ul>
         </div>
         <div class="stage reveal" style="--d:120"><img class="drop" src="img/shelf-items.png" width="496" height="210" alt="Shelf with two photos, a PDF and a folder" loading="lazy"></div>
@@ -653,7 +683,7 @@ footer .brand img { width: 22px; height: 22px; }
         <div class="card reveal" style="--d:160">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
           <h4>Keeps itself up to date</h4>
-          <p>Checks for a new version once a day; one click updates and restarts it.</p>
+          <p>Checks for a new version once a day; one click updates and restarts it. Only updates signed by Cosmo are installed.</p>
         </div>
         <div class="card reveal" style="--d:0">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v10l-6 6H5Z"/><path d="M13 20v-6h6M8.5 9h7M8.5 13h3"/></svg></div>
@@ -683,12 +713,12 @@ footer .brand img { width: 22px; height: 22px; }
       </div>
       <div class="stats">
         <div class="stat reveal" style="--d:0"><b><span class="count" data-to="22" data-prefix="~">~22</span><em>MB</em></b><span>of memory while running, measured with music and lyrics playing</span></div>
-        <div class="stat reveal" style="--d:100"><b><span class="count" data-to="2.6" data-decimals="1">2.6</span><em>MB</em></b><span>installer, one small program and nothing else</span></div>
+        <div class="stat reveal" style="--d:100"><b><span class="count" data-to="2.9" data-decimals="1">2.9</span><em>MB</em></b><span>installer, one small program and nothing else</span></div>
         <div class="stat reveal" style="--d:200"><b><span class="count" data-to="0">0</span></b><span>redraws while nothing moves: it sleeps until the song, the clock or your mouse changes</span></div>
       </div>
       <div class="privacy">
-        <div class="card reveal"><h4>Stays on your PC</h4><p>No account, no tracking. Notifications are never saved, and clipboard history is stored encrypted so only your Windows account can read it.</p></div>
-        <div class="card reveal" style="--d:100"><h4>A few small requests go out</h4><p>To find lyrics, the song's title, artist and length are sent to <a href="https://lrclib.net">LRCLIB</a>, and to NetEase if LRCLIB has none. Once a day it asks GitHub for the newest version (you can turn that off), and the Kanji readings add-on comes from GitHub only if you switch it on. Nothing else.</p></div>
+        <div class="card reveal"><h4>Stays on your PC</h4><p>No account, no tracking. Notifications are never saved, and clipboard history, sticky notes and tasks are stored encrypted so only your Windows account can read them.</p></div>
+        <div class="card reveal" style="--d:100"><h4>A few small requests go out</h4><p>To find lyrics, the song's title, artist and length are sent to <a href="https://lrclib.net">LRCLIB</a>, and to NetEase if LRCLIB has none. Once a day it asks GitHub for the newest version (you can turn that off), and add-ons come from GitHub only if you switch them on. A capture goes to Cosmo's sharing server only when you choose Share, and is deleted 12 hours later. Nothing else.</p></div>
       </div>
     </div>
   </section>
@@ -768,11 +798,15 @@ footer .brand img { width: 22px; height: 22px; }
         </details>
         <details>
           <summary>Where are my settings kept?</summary>
-          <p>In <code>%APPDATA%\Cosmo</code>: settings, tasks, sticky notes, the focus timer, pinned apps, the shelf, clipboard history (encrypted), saved lyrics and their timing fixes, and the Kanji readings add-on, so all of it is still there after a restart. Uninstalling asks whether to remove them too.</p>
+          <p>In <code>%APPDATA%\Cosmo</code>: settings, tasks and sticky notes (encrypted), the focus timer, pinned apps, the shelf, clipboard history (encrypted), saved lyrics and their timing fixes, and add-ons, so all of it is still there after a restart. Screenshots and recordings go to Pictures › Screenshots › Cosmo. Uninstalling asks whether to remove Cosmo's data too.</p>
         </details>
         <details>
           <summary>Japanese lyrics still show kanji.</summary>
           <p>Kana and hangul are turned into Latin letters on their own; kanji need the <b>Kanji readings</b> add-on in Settings › Features. A line with a word the add-on doesn't know is left as written rather than half converted.</p>
+        </details>
+        <details>
+          <summary>Who can see a capture I share?</summary>
+          <p>Anyone with its link, for 12 hours. Then the file is deleted from Cosmo's sharing server and the link stops working. To take one down sooner, open Captures › Links and press the ×. Links are random, so they can't be guessed.</p>
         </details>
         <details>
           <summary>How do I update?</summary>

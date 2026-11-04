@@ -13,7 +13,7 @@ This repository holds Cosmo's releases, its website (`docs/`) and its add-ons. T
 ## What leaves your PC
 
 - **Lyrics:** the song's title, artist and length are sent to [LRCLIB](https://lrclib.net) to find synced lyrics. From Cosmo 0.1.7, songs LRCLIB doesn't have are also looked up on NetEase Cloud Music, which has many more Japanese, Korean and Chinese songs. Results are kept in `%APPDATA%\Cosmo\lyrics`, so each song is looked up once.
-- **Updates:** Cosmo asks GitHub for the latest release of this repository, a few seconds after it starts and then once a day. No data about you is sent. It can be switched off with **Check for updates**.
+- **Updates:** Cosmo asks GitHub for the latest release of this repository, a few seconds after it starts and then every hour. No data about you is sent. It can be switched off with **Check for updates**.
 - **Add-ons:** downloaded from this repository's releases, only when switched on.
 
 Everything else (tasks, clipboard history, settings, files on the shelf) stays on your PC, in `%APPDATA%\Cosmo`.

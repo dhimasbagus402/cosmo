@@ -1,6 +1,6 @@
 # Cosmo
 
-A living island at the top of your Windows screen: music and synced lyrics, a focus timer, tasks, system stats, a clipboard history, a shelf for files, an FPS overlay and more.
+A living island at the top of your Windows screen: music and synced lyrics, a focus timer, tasks, system stats, a clipboard history with text shortcuts, a shelf for files, an FPS overlay and more.
 
 **Website:** https://cosmo.dhimasbagus.my.id
 

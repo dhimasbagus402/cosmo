@@ -68,7 +68,8 @@ footer a { color: var(--muted); }
   <p class="lead">Cosmo is a free Windows app that sits at the top of your screen as a small island: music and lyrics, notifications, clipboard history, tasks, sticky notes, captures and more. It's made to keep your things on your PC. This page says what it keeps, what leaves your PC, and where it goes.</p>
 
   <h2>What stays on your PC</h2>
-  <p>Settings, clipboard history, tasks, sticky notes, the shelf, saved lyrics and add-ons are kept in <code>%APPDATA%\Cosmo</code>. Clipboard history, tasks and sticky notes are encrypted so only your Windows account can read them. Notifications are shown and never saved. Screenshots and recordings go to Pictures › Screenshots › Cosmo. Uninstalling asks whether to remove Cosmo's data too.</p>
+  <p>Settings, clipboard history, tasks, sticky notes, the shelf, saved lyrics and add-ons are kept in <code>%APPDATA%\Cosmo</code>. Clipboard history, tasks and sticky notes are encrypted so only your Windows account can read them. Text shortcuts are encrypted the same way. Notifications are shown and never saved. Screenshots and recordings go to Pictures › Screenshots › Cosmo. Uninstalling asks whether to remove Cosmo's data too.</p>
+  <p><strong>Text shortcuts</strong>, if you make any: to notice a keyword being typed, Cosmo watches the keys you press in other apps while the feature is on. It remembers only the last few characters, in memory, forgets them when you switch windows or move the cursor, and never saves or sends them. Keys typed in Cosmo's own windows aren't watched. To put a shortcut's text in, Cosmo briefly borrows the clipboard and then puts back what was there.</p>
   <p>Cosmo has no analytics, no ads and no tracking, and doesn't sell or share anything about you.</p>
 
   <h2>What goes out, and only for what you use</h2>
@@ -83,7 +84,7 @@ footer a { color: var(--muted); }
 
   <h2>Sync with your Google account</h2>
   <div class="card">
-    <p>Signing in is optional. If you do, Cosmo keeps your settings, clipboard history, tasks and sticky notes the same on every PC you sign in on. You choose which of these sync.</p>
+    <p>Signing in is optional. If you do, Cosmo keeps your settings, clipboard history and its commands, text shortcuts, tasks and sticky notes the same on every PC you sign in on. You choose which of these sync.</p>
     <p><strong>What Cosmo asks Google for:</strong></p>
     <ul>
       <li><strong>Your email address</strong> (<code>openid</code>, <code>email</code>), only to show which account you're signed in with.</li>

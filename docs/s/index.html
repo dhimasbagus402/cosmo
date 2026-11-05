@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shared with Cosmo</title>
-<meta name="description" content="A screenshot or recording shared with Cosmo. Links last 12 hours.">
+<meta name="description" content="A screenshot or recording shared with Cosmo.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#050506">
 <meta property="og:title" content="Shared with Cosmo">
-<meta property="og:description" content="A screenshot or recording shared with Cosmo. Links last 12 hours.">
+<meta property="og:description" content="A screenshot or recording shared with Cosmo.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://cosmo.dhimasbagus.my.id/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -60,6 +60,8 @@ main { flex: 1; display: flex; justify-content: center; align-items: flex-start;
 .note p { margin: 0 auto; color: var(--muted); max-width: 420px; }
 .note .dot { width: 54px; height: 54px; border-radius: 50%; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; font-size: 24px; }
 .note a { color: var(--accent); }
+.note .bar { width: 220px; height: 6px; border-radius: 3px; margin: 18px auto 0; background: var(--surface); overflow: hidden; }
+.note .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 .spin { width: 34px; height: 34px; margin: 0 auto; border-radius: 50%; border: 3px solid var(--line); border-top-color: var(--accent); animation: spin 0.9s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 footer { text-align: center; color: var(--faint); font-size: 12.5px; padding: 0 16px 24px; }
@@ -75,12 +77,49 @@ footer a { color: var(--muted); }
     <div class="note"><div class="spin"></div></div>
   </div>
 </main>
-<footer>Shared with <a href="https://cosmo.dhimasbagus.my.id/">Cosmo</a> · links last 12 hours, then the file is deleted</footer>
+<footer>Shared with <a href="https://cosmo.dhimasbagus.my.id/">Cosmo</a></footer>
 <script>
-// The link's id is what follows "?": /s/?k3x9pq7m
-const API = "https://gyftoaaydbqfklsdmyku.supabase.co/functions/v1/cosmo/share";
+// The link's id is what follows "?": /s/?k3x9pq7m. A long link carries the
+// key the file is locked with after "#", which the browser never sends
+// anywhere; a short link's key comes from the server. The file is opened
+// here, in the browser.
+const API = "https://share.cosmos.web.id/share";
+// Links shared from Cosmo before 0.7 live 12 hours on the old server.
+const OLD_API = "https://gyftoaaydbqfklsdmyku.supabase.co/functions/v1/cosmo/share";
 const card = document.getElementById("card");
 const id = location.search.replace(/^\?/, "").split("&")[0];
+const hashKey = location.hash.replace(/^#/, "");
+const TYPES = { image: ["image/png", "png"], gif: ["image/gif", "gif"], video: ["video/mp4", "mp4"] };
+
+function fromB64url(s) {
+  const b = atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4));
+  return Uint8Array.from(b, (c) => c.charCodeAt(0));
+}
+
+/** What was locked with `key` (base64url): nonce first, then cipher text and tag. */
+async function unlock(bytes, key) {
+  const k = await crypto.subtle.importKey("raw", fromB64url(key), "AES-GCM", false, ["decrypt"]);
+  return new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv: bytes.slice(0, 12) }, k, bytes.slice(12)));
+}
+
+/** The locked file, with how far it's come shown on `bar`. */
+async function download(url, total, bar) {
+  const r = await fetch(url);
+  if (!r.ok || !r.body) throw new Error("file");
+  const out = new Uint8Array(total);
+  let got = 0;
+  const reader = r.body.getReader();
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    if (got + value.length > total) throw new Error("size");
+    out.set(value, got);
+    got += value.length;
+    bar.style.width = Math.round((got / total) * 100) + "%";
+  }
+  if (got !== total) throw new Error("size");
+  return out;
+}
 
 function note(icon, title, text) {
   card.innerHTML = "";
@@ -106,7 +145,7 @@ function left(until, el) {
   const tick = () => {
     const s = Math.floor((until - Date.now()) / 1000);
     if (s <= 0) {
-      note("⏱", "This link has run out", "Links shared from Cosmo last 12 hours, then the file is deleted.");
+      note("⏱", "This link has run out", "Links shared from older versions of Cosmo last 12 hours, then the file is deleted.");
       return;
     }
     const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
@@ -121,20 +160,51 @@ async function show() {
     note("?", "Nothing here", "This link isn't complete. Check that it was copied whole.");
     return;
   }
-  let r;
+  let r, data;
   try {
     r = await fetch(API + "?id=" + encodeURIComponent(id));
+    data = await r.json().catch(() => ({}));
+    // Not on the new server: it may be an older link, still on the old one.
+    if (r.status === 404) {
+      const old = await fetch(OLD_API + "?id=" + encodeURIComponent(id)).catch(() => null);
+      if (old && old.ok) {
+        r = old;
+        data = await old.json().catch(() => ({}));
+      }
+    }
   } catch (e) {
     note("!", "Couldn't load it", "Check your connection and try again.");
     return;
   }
-  const data = await r.json().catch(() => ({}));
   if (!r.ok) {
-    note("⏱", "This link has run out", "Links shared from Cosmo last 12 hours, then the file is deleted.");
+    note("⏱", "This link is gone", "This link doesn't exist, or its file was cleared to make room for newer ones.");
     return;
   }
   const kind = data.kind;
-  const title = data.title || (kind === "video" ? "Recording" : kind === "gif" ? "GIF" : "Screenshot");
+  // Locked (from Cosmo 0.7 on): opened here with the key.
+  let src = data.url, save = data.download, plainTitle = data.title;
+  if (!data.expires_at) {
+    const key = hashKey || data.key;
+    if (!key) {
+      note("🔒", "This link is missing its key", "The part after # was cut off. Ask for the whole link again.");
+      return;
+    }
+    card.innerHTML = '<div class="note"><div class="dot">🔒</div><h1>Opening…</h1><p>The file is unlocked here, in your browser.</p><div class="bar"><i></i></div></div>';
+    try {
+      const locked = await download(data.url, data.size, card.querySelector(".bar i"));
+      const plain = await unlock(locked, key);
+      plainTitle = data.title ? new TextDecoder().decode(await unlock(fromB64url(data.title), key)) : "";
+      const [type, ext] = TYPES[kind] || ["application/octet-stream", "bin"];
+      src = URL.createObjectURL(new Blob([plain], { type }));
+      save = src;
+      data.saveName = (plainTitle || "cosmo-" + id).replace(/[\\/:*?"<>|]+/g, " ").trim() + "." + ext;
+      data.size = plain.length;
+    } catch (e) {
+      note("🔒", "Couldn't open it", "The link's key doesn't fit this file, or it didn't load whole. Check the link was copied whole.");
+      return;
+    }
+  }
+  const title = plainTitle || (kind === "video" ? "Recording" : kind === "gif" ? "GIF" : "Screenshot");
   document.title = title + " · Cosmo";
   card.innerHTML = "";
 
@@ -142,14 +212,14 @@ async function show() {
   media.className = "media";
   if (kind === "video") {
     const v = document.createElement("video");
-    v.src = data.url;
+    v.src = src;
     v.controls = true;
     v.playsInline = true;
     v.preload = "metadata";
     media.appendChild(v);
   } else {
     const img = document.createElement("img");
-    img.src = data.url;
+    img.src = src;
     img.alt = title;
     media.appendChild(img);
   }
@@ -161,12 +231,22 @@ async function show() {
   info.querySelector("h1").textContent = title;
   info.querySelector(".views").textContent = data.views === 1 ? "1 view" : `${data.views} views`;
   info.querySelector(".size").textContent = size(data.size);
-  info.querySelector(".download").href = data.download;
+  const dl = info.querySelector(".download");
+  dl.href = save;
+  if (data.saveName) dl.download = data.saveName;
   card.appendChild(info);
-  left(Date.parse(data.expires_at), info.querySelector(".left"));
+  // Older links count down; the rest say when they were shared.
+  if (data.expires_at) {
+    left(Date.parse(data.expires_at), info.querySelector(".left"));
+  } else {
+    const when = new Date(data.created_at);
+    info.querySelector(".left").textContent = "Shared " + when.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
+  }
 }
 
 show();
+// A key pasted in after the page opened: open it again with that one.
+addEventListener("hashchange", () => location.reload());
 </script>
 </body>
 </html>

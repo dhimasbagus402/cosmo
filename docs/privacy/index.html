@@ -64,7 +64,7 @@ footer a { color: var(--muted); }
 </header>
 <main>
   <h1>Privacy</h1>
-  <p class="updated">Last updated 4 November 2026</p>
+  <p class="updated">Last updated 17 November 2026</p>
   <p class="lead">Cosmo is a free Windows app that sits at the top of your screen as a small island: music and lyrics, notifications, clipboard history, tasks, sticky notes, captures and more. It's made to keep your things on your PC. This page says what it keeps, what leaves your PC, and where it goes.</p>
 
   <h2>What stays on your PC</h2>
@@ -80,6 +80,8 @@ footer a { color: var(--muted); }
     <li><strong>Sharing a capture:</strong> only when you choose Share, the capture is encrypted on your PC (AES-256-GCM, a new key for each) and uploaded to Cosmo's own sharing server, reached through Cloudflare. With a long link (the default), the key is only in the link, after "#", which browsers never send: the server can't open the capture or its title. With a short link (Captures › settings), the server keeps the key so the page can open it. Anyone with the link can see it until you take it down (Captures › Links › ×). The server keeps 10 GB of shared captures in all: when it's full, the oldest are deleted to make room. What's kept with it: its encrypted title, size, kind, how many times it was seen, and a one-way code of your Cosmo's random sharing key, so only your Cosmo can list or delete it. Your IP address isn't stored; for limiting uploads, a keyed one-way code of it is kept for two days.</li>
     <li><strong>Translation:</strong> text you translate goes through Cosmo's server to Cloudflare's AI and isn't kept.</li>
     <li><strong>Lyric translation</strong>, if you turn it on: a song's lyrics go to Cosmo's own server, which has Cloudflare's AI translate them into English or Indonesian. The lyrics and their translation are kept there for good and given to anyone who plays the same song, so each song is translated once; nothing about who asked is kept with them. If that server can't be reached, the lyrics go through Cosmo's Supabase server instead, which doesn't keep them. Translations are also kept on your PC with the song's lyrics.</li>
+    <li><strong>Network page:</strong> once you've opened it, Cosmo pings your router, Cloudflare (1.1.1.1) and Google (8.8.8.8) once a second until it quits, to show how long a ping takes. While the page is open it asks Cloudflare (<code>1.1.1.1/cdn-cgi/trace</code>) for your public IP address, at most every ten minutes, and shows it only when you click it; it isn't kept. A speed test downloads from and uploads to Cloudflare (speed.cloudflare.com) only when you start one.</li>
+    <li><strong>Disk health, Storage and Devices</strong> are read on your PC from Windows and never sent anywhere.</li>
     <li><strong>Sync</strong>, if you sign in with Google: see below.</li>
   </ul>
 

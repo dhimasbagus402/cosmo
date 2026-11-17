@@ -597,6 +597,64 @@ footer nav a:hover { color: var(--text); }
         </div>
       </div>
 
+      <div class="row flip">
+        <div class="copy reveal">
+          <span class="tag">Storage</span>
+          <h3>See what fills the drive, then clear it.</h3>
+          <p>The Storage window scans one drive or all of them: the kinds of files taking the room, the biggest folders and files, copies of the same file, and files you haven't changed in a year. Each finding comes with what you can do about it.</p>
+          <ul class="ticks">
+            <li>Copies are matched by what's in them, not by their names</li>
+            <li>Temporary files, app caches and the Recycle Bin cleared from one place, and anything in the Recycle Bin restored to where it was</li>
+            <li>Removing is held to confirm, and files go to the Recycle Bin</li>
+            <li>Resize, maximize or minimize it like any app window</li>
+          </ul>
+        </div>
+        <div class="stage alt reveal" style="--d:120"><img class="shot" src="img/storage-analyzer.png" width="640" height="600" alt="The Storage window's Analyzer: a drive's space by kind of file, then cleanup suggestions for Downloads, temporary files and old files" loading="lazy"></div>
+      </div>
+
+      <div class="row">
+        <div class="copy reveal">
+          <span class="tag">Disk health</span>
+          <h3>Hear about a tired drive while there's time to back up.</h3>
+          <p>Temperature, life used, errors, data written and power cuts for every disk, with a month of history and advice in plain words. Cosmo checks in the background every 30 minutes and tells you on the island when something new turns up.</p>
+          <ul class="ticks">
+            <li>Choose how often it checks (or turn it off) and the temperature to warn at</li>
+            <li>Maintenance: run TRIM, scan a drive's file system, clear old temporary files</li>
+            <li>Reminders to back up and to run maintenance, every 7 to 60 days</li>
+          </ul>
+        </div>
+        <div class="stage reveal" style="--d:120"><img class="drop" src="img/storage-health.png" width="521" height="485" alt="Storage's Health tab: three issues on one SSD, and each disk with its temperature, life used and state" loading="lazy"></div>
+      </div>
+
+      <div class="pair">
+        <div>
+          <div class="stage alt reveal" style="--d:120"><img class="drop" src="img/network.png" width="521" height="517" alt="Network page: the Ethernet connection, traffic over the last minute, and latency to Cloudflare" loading="lazy"></div>
+          <div class="copy reveal">
+            <span class="tag">Network</span>
+            <h3>Your connection, and how it's holding up.</h3>
+            <p>The connection you're on, its traffic over the last minute, and how long a ping takes to your router, Cloudflare and Google.</p>
+            <ul class="ticks">
+              <li>Join a Wi-Fi network, disconnect, or forget one</li>
+              <li>A speed test against Cloudflare</li>
+              <li>Your public IP stays hidden until you click it</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="stage reveal" style="--d:120"><img class="drop" src="img/devices.png" width="521" height="517" alt="Devices page: Bluetooth headphones at 80%, a mouse at 15% in red, a phone, a controller and a USB drive" loading="lazy"></div>
+          <div class="copy reveal">
+            <span class="tag">Devices</span>
+            <h3>Every battery in one place.</h3>
+            <p>Bluetooth headphones, mice and phones with their battery, game controllers, USB drives, and everything else plugged in.</p>
+            <ul class="ticks">
+              <li>Connect, disconnect or remove a Bluetooth device</li>
+              <li>Eject a USB drive safely</li>
+              <li>A battery at 20% or less pops up on the island, once</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       <div class="pair">
         <div>
           <div class="stage alt reveal" style="--d:120"><img class="drop" src="img/shelf-items.png" width="496" height="210" alt="Shelf with two photos, a PDF and a folder" loading="lazy"></div>
@@ -750,7 +808,7 @@ footer nav a:hover { color: var(--text); }
       </div>
       <div class="privacy">
         <div class="card reveal"><h3>Stays on your PC</h3><p>No account needed, no tracking. Notifications are never saved, and clipboard history, sticky notes and tasks are stored encrypted so only your Windows account can read them. If you choose to sign in with Google, they sync between your PCs through a hidden Cosmo folder in your Drive, encrypted with a password only you know (unless you choose not to).</p></div>
-        <div class="card reveal"><h3>A few small requests go out</h3><p>To find lyrics, the song's title, artist and length are sent to <a href="https://lrclib.net">LRCLIB</a>, and to NetEase if LRCLIB has none. Every hour it asks GitHub for the newest version (you can turn that off), and add-ons come from GitHub only if you switch them on. A capture goes to Cosmo's sharing server only when you choose Share, encrypted on your PC first, and stays until you take it down. Text you translate goes through Cosmo's server to Cloudflare's AI and isn't kept. With Weather on, your rough location (or a place you type) goes to weather and map services. Nothing else. <a href="privacy/">Read the privacy policy</a>.</p></div>
+        <div class="card reveal"><h3>A few small requests go out</h3><p>To find lyrics, the song's title, artist and length are sent to <a href="https://lrclib.net">LRCLIB</a>, and to NetEase if LRCLIB has none. Every hour it asks GitHub for the newest version (you can turn that off), and add-ons come from GitHub only if you switch them on. A capture goes to Cosmo's sharing server only when you choose Share, encrypted on your PC first, and stays until you take it down. Text you translate goes through Cosmo's server to Cloudflare's AI and isn't kept. With Weather on, your rough location (or a place you type) goes to weather and map services. Once you've opened the Network page, your router, Cloudflare and Google are pinged once a second to time the connection; while it's open, Cloudflare is asked for your public IP, and a speed test runs only when you start one. Nothing else. <a href="privacy/">Read the privacy policy</a>.</p></div>
       </div>
     </div>
   </section>
